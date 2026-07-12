@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="20.0" style="-fx-background-color: transparent;"
+      xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.librarysystem.controller.StudentController">
+
+    <!-- Action Bar: Search & Add -->
+    <HBox spacing="15.0" alignment="CENTER_LEFT" styleClass="card" style="-fx-padding: 15px;">
+        <TextField fx:id="txtSearch" promptText="🔍 Search students by Name, ID, Department, or Email..." HBox.hgrow="ALWAYS" styleClass="text-field"/>
+        <Button text="+ Register Student" onAction="#handleNewStudent" styleClass="btn-primary"/>
+    </HBox>
+
+    <!-- Split Pane: Table & Details Editor -->
+    <SplitPane dividerPositions="0.65" VBox.vgrow="ALWAYS" style="-fx-background-color: transparent; -fx-border-color: transparent;">
+        <items>
+            <!-- Left: Student List -->
+            <VBox spacing="10.0" styleClass="card">
+                <TableView fx:id="tableStudents" VBox.vgrow="ALWAYS" styleClass="table-view">
+                    <columns>
+                        <TableColumn fx:id="colStudentId" text="Student ID" prefWidth="120.0"/>
+                        <TableColumn fx:id="colName" text="Name" prefWidth="180.0"/>
+                        <TableColumn fx:id="colEmail" text="Email" prefWidth="180.0"/>
+                        <TableColumn fx:id="colPhone" text="Phone" prefWidth="120.0"/>
+                        <TableColumn fx:id="colDepartment" text="Department" prefWidth="130.0"/>
+                        <TableColumn fx:id="colSemester" text="Sem" prefWidth="50.0"/>
+                    </columns>
+                    <placeholder>
+                        <Label text="No student records found."/>
+                    </placeholder>
+                </TableView>
+            </VBox>
+
+            <!-- Right: Details/Editor -->
+            <VBox spacing="20.0" styleClass="card" fx:id="panelEditor" disable="true">
+                <Label fx:id="lblEditorTitle" text="Student Details" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+
+                <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent; -fx-border-color: transparent;" VBox.vgrow="ALWAYS">
+                    <VBox spacing="12.0">
+                        <VBox spacing="5">
+                            <Label text="Student ID *" style="-fx-font-weight: bold;"/>
+                            <TextField fx:id="txtStudentId" promptText="e.g. STU001"/>
+                        </VBox>
+
+                        <VBox spacing="5">
+                            <Label text="Full Name *" style="-fx-font-weight: bold;"/>
+                            <TextField fx:id="txtName" promptText="Enter full name"/>
+                        </VBox>
+
+                        <VBox spacing="5">
+                            <Label text="Email Address" style="-fx-font-weight: bold;"/>
+                            <TextField fx:id="txtEmail" promptText="e.g. student@college.edu"/>
+                        </VBox>
+
+                        <VBox spacing="5">
+                            <Label text="Phone Number" style="-fx-font-weight: bold;"/>
+                            <TextField fx:id="txtPhone" promptText="e.g. +91 9876543210"/>
+                        </VBox>
+
+                        <VBox spacing="5">
+                            <Label text="Department" style="-fx-font-weight: bold;"/>
+                            <TextField fx:id="txtDepartment" promptText="e.g. Computer Science"/>
+                        </VBox>
+
+                        <VBox spacing="5">
+                            <Label text="Semester (1 - 8) *" style="-fx-font-weight: bold;"/>
+                            <TextField fx:id="txtSemester" promptText="e.g. 4"/>
+                        </VBox>
+                    </VBox>
+                </ScrollPane>
+
+                <HBox spacing="10.0" alignment="CENTER_RIGHT">
+                    <Button text="Delete" onAction="#handleDeleteStudent" styleClass="btn-danger"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Button text="Cancel" onAction="#handleCancelEdit" styleClass="btn-secondary"/>
+                    <Button text="Save" onAction="#handleSaveStudent" styleClass="btn-primary"/>
+                </HBox>
+            </VBox>
+        </items>
+    </SplitPane>
+</VBox>

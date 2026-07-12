@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent;"
+            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.librarysystem.controller.DashboardController">
+
+    <VBox spacing="30.0" style="-fx-background-color: transparent;">
+        <!-- Metrics Row -->
+        <GridPane hgap="20.0" vgap="20.0" VBox.vgrow="NEVER">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="25.0"/>
+                <ColumnConstraints percentWidth="25.0"/>
+                <ColumnConstraints percentWidth="25.0"/>
+                <ColumnConstraints percentWidth="25.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="110.0" prefHeight="110.0"/>
+            </rowConstraints>
+
+            <children>
+                <!-- Card 1: Total Books -->
+                <VBox spacing="10" styleClass="card, stat-card-total" GridPane.columnIndex="0">
+                    <Label text="TOTAL BOOKS" style="-fx-font-size: 12px; -fx-font-weight: bold;"/>
+                    <Label fx:id="lblTotalBooks" text="0" style="-fx-font-size: 28px; -fx-font-weight: bold;"/>
+                    <Label text="Books in catalog" style="-fx-font-size: 11px;"/>
+                </VBox>
+
+                <!-- Card 2: Total Students -->
+                <VBox spacing="10" styleClass="card, stat-card-available" GridPane.columnIndex="1">
+                    <Label text="TOTAL MEMBERS" style="-fx-font-size: 12px; -fx-font-weight: bold;"/>
+                    <Label fx:id="lblTotalStudents" text="0" style="-fx-font-size: 28px; -fx-font-weight: bold;"/>
+                    <Label text="Registered students" style="-fx-font-size: 11px;"/>
+                </VBox>
+
+                <!-- Card 3: Active Loans -->
+                <VBox spacing="10" styleClass="card, stat-card-issued" GridPane.columnIndex="2">
+                    <Label text="ACTIVE ISSUES" style="-fx-font-size: 12px; -fx-font-weight: bold;"/>
+                    <Label fx:id="lblActiveIssues" text="0" style="-fx-font-size: 28px; -fx-font-weight: bold;"/>
+                    <Label text="Books currently out" style="-fx-font-size: 11px;"/>
+                </VBox>
+
+                <!-- Card 4: Overdue & Fines -->
+                <VBox spacing="10" styleClass="card, stat-card-overdue" GridPane.columnIndex="3">
+                    <Label text="OVERDUE BOOKS" style="-fx-font-size: 12px; -fx-font-weight: bold;"/>
+                    <Label fx:id="lblOverdueBooks" text="0" style="-fx-font-size: 28px; -fx-font-weight: bold;"/>
+                    <Label fx:id="lblTotalFines" text="Fines: ₹0.00" style="-fx-font-size: 11px; -fx-font-weight: bold;"/>
+                </VBox>
+            </children>
+        </GridPane>
+
+        <!-- Charts & Popularity Table Section -->
+        <HBox spacing="25.0" VBox.vgrow="ALWAYS">
+            <!-- Left side: Bar Chart for Issue trends -->
+            <VBox styleClass="card" HBox.hgrow="ALWAYS" prefHeight="380.0" spacing="15">
+                <Label text="Issue Trends (Last 6 Months)" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                <BarChart fx:id="chartIssues" legendVisible="false" VBox.vgrow="ALWAYS">
+                    <xAxis>
+                        <CategoryAxis label="Month" side="BOTTOM"/>
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis label="Issues" side="LEFT" tickUnit="1"/>
+                    </yAxis>
+                </BarChart>
+            </VBox>
+
+            <!-- Right side: Pie Chart for Genre distribution -->
+            <VBox styleClass="card" prefWidth="420.0" prefHeight="380.0" spacing="15">
+                <Label text="Genre Distribution" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                <PieChart fx:id="chartGenre" legendSide="BOTTOM" VBox.vgrow="ALWAYS"/>
+            </VBox>
+        </HBox>
+
+        <!-- Popular Books Row -->
+        <VBox styleClass="card" spacing="15" VBox.vgrow="ALWAYS">
+            <Label text="Top 5 Most Popular Books" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+            <TableView fx:id="tablePopularBooks" prefHeight="220.0" styleClass="table-view">
+                <columns>
+                    <TableColumn fx:id="colPopTitle" text="Book Title" prefWidth="600.0"/>
+                    <TableColumn fx:id="colPopIssues" text="Times Borrowed" prefWidth="250.0"/>
+                </columns>
+                <placeholder>
+                    <Label text="No records available."/>
+                </placeholder>
+            </TableView>
+        </VBox>
+    </VBox>
+</ScrollPane>

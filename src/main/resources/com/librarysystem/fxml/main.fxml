@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.librarysystem.controller.MainController"
+            prefWidth="1200.0" prefHeight="800.0"
+            styleClass="root">
+
+    <!-- Left Sidebar -->
+    <left>
+        <VBox alignment="TOP_CENTER" spacing="20.0" prefWidth="240.0" styleClass="sidebar">
+            <!-- Brand Logo Header -->
+            <VBox alignment="CENTER" spacing="10" prefHeight="80.0">
+                <Label text="📚 ATHENA" styleClass="sidebar-logo"/>
+                <Label text="LIBRARY SYSTEM" style="-fx-text-fill: -color-sidebar-text; -fx-font-size: 10px; -fx-font-weight: bold; -fx-letter-spacing: 2px;"/>
+            </VBox>
+
+            <Separator opacity="0.1" prefWidth="200.0"/>
+
+            <!-- Sidebar Navigation Links -->
+            <VBox spacing="8.0" VBox.vgrow="ALWAYS" alignment="TOP_CENTER">
+                <Button fx:id="btnDashboard" text="Dashboard" onAction="#showDashboard" styleClass="sidebar-item" maxWidth="Infinity"/>
+                <Button fx:id="btnBooks" text="Book Management" onAction="#showBooks" styleClass="sidebar-item" maxWidth="Infinity"/>
+                <Button fx:id="btnStudents" text="Student Management" onAction="#showStudents" styleClass="sidebar-item" maxWidth="Infinity"/>
+                <Button fx:id="btnIssuedBooks" text="Issue &amp; Returns" onAction="#showIssuedBooks" styleClass="sidebar-item" maxWidth="Infinity"/>
+                <Button fx:id="btnReports" text="Reports" onAction="#showReports" styleClass="sidebar-item" maxWidth="Infinity"/>
+            </VBox>
+
+            <!-- Bottom Session Actions -->
+            <VBox spacing="10.0" alignment="BOTTOM_CENTER" style="-fx-padding: 0 10px;">
+                <Separator opacity="0.1" prefWidth="200.0"/>
+                <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-padding: 10px 0;">
+                    <VBox HBox.hgrow="ALWAYS">
+                        <Label fx:id="lblLoggedUser" text="Administrator" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 13px;"/>
+                        <Label fx:id="lblUserRole" text="ADMIN" style="-fx-text-fill: -color-sidebar-text; -fx-font-size: 11px;"/>
+                    </VBox>
+                    <Button text="🚪" onAction="#handleLogout" style="-fx-background-color: transparent; -fx-text-fill: #ef4444; -fx-font-size: 16px; -fx-cursor: hand;"/>
+                </HBox>
+            </VBox>
+        </VBox>
+    </left>
+
+    <!-- Content Area & Top Header -->
+    <center>
+        <BorderPane>
+            <!-- Header Panel -->
+            <top>
+                <HBox alignment="CENTER_RIGHT" spacing="20.0" prefHeight="65.0"
+                      style="-fx-background-color: -color-panel; -fx-border-color: -color-border; -fx-border-width: 0 0 1px 0; -fx-padding: 0 30px;">
+                    <Label fx:id="lblViewTitle" text="Dashboard" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: -color-text;" HBox.hgrow="ALWAYS"/>
+                    <Region HBox.hgrow="ALWAYS" />
+                    
+                    <!-- Theme Toggle Switch -->
+                    <HBox alignment="CENTER" spacing="10">
+                        <Label text="☀️" style="-fx-font-size: 14px;"/>
+                        <ToggleButton fx:id="toggleTheme" onAction="#handleThemeToggle" text="Dark Mode" styleClass="btn-secondary" style="-fx-font-size: 12px;"/>
+                        <Label text="🌙" style="-fx-font-size: 14px;"/>
+                    </HBox>
+                </HBox>
+            </top>
+
+            <!-- Child View Container -->
+            <center>
+                <StackPane fx:id="contentArea" style="-fx-padding: 30px;">
+                    <!-- Child views are dynamically loaded and injected here -->
+                </StackPane>
+            </center>
+        </BorderPane>
+    </center>
+</BorderPane>

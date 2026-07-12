@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="20.0" style="-fx-background-color: transparent;"
+      xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.librarysystem.controller.BookController">
+
+    <!-- Action Bar: Search & Filter, Add Button -->
+    <HBox spacing="15.0" alignment="CENTER_LEFT" styleClass="card" style="-fx-padding: 15px;">
+        <TextField fx:id="txtSearch" promptText="🔍 Search books by Title, Author, Genre, or ISBN..." HBox.hgrow="ALWAYS" styleClass="text-field"/>
+        <Button text="+ Add Book" onAction="#handleNewBook" styleClass="btn-primary"/>
+    </HBox>
+
+    <!-- Split Pane: Table left, Edit Form right -->
+    <SplitPane dividerPositions="0.65" VBox.vgrow="ALWAYS" style="-fx-background-color: transparent; -fx-border-color: transparent;">
+        <items>
+            <!-- Left Side: Table -->
+            <VBox spacing="10.0" styleClass="card">
+                <TableView fx:id="tableBooks" VBox.vgrow="ALWAYS" styleClass="table-view">
+                    <columns>
+                        <TableColumn fx:id="colIsbn" text="ISBN" prefWidth="130.0"/>
+                        <TableColumn fx:id="colTitle" text="Title" prefWidth="220.0"/>
+                        <TableColumn fx:id="colAuthor" text="Author" prefWidth="150.0"/>
+                        <TableColumn fx:id="colGenre" text="Genre" prefWidth="100.0"/>
+                        <TableColumn fx:id="colQty" text="Total" prefWidth="70.0"/>
+                        <TableColumn fx:id="colAvail" text="Available" prefWidth="80.0"/>
+                    </columns>
+                    <placeholder>
+                        <Label text="No books found in the catalog."/>
+                    </placeholder>
+                </TableView>
+            </VBox>
+
+            <!-- Right Side: Details / Editor Panel -->
+            <VBox spacing="20.0" styleClass="card" fx:id="panelEditor" disable="true">
+                <Label fx:id="lblEditorTitle" text="Book Details" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                
+                <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent; -fx-border-color: transparent;" VBox.vgrow="ALWAYS">
+                    <VBox spacing="12.0">
+                        <VBox spacing="5">
+                            <Label text="ISBN *" style="-fx-font-weight: bold;"/>
+                            <TextField fx:id="txtIsbn" promptText="e.g. 978-0-1234-5678-9"/>
+                        </VBox>
+                        
+                        <VBox spacing="5">
+                            <Label text="Title *" style="-fx-font-weight: bold;"/>
+                            <TextField fx:id="txtTitle" promptText="Enter book title"/>
+                        </VBox>
+                        
+                        <VBox spacing="5">
+                            <Label text="Author *" style="-fx-font-weight: bold;"/>
+                            <TextField fx:id="txtAuthor" promptText="Enter author name"/>
+                        </VBox>
+                        
+                        <VBox spacing="5">
+                            <Label text="Publisher" style="-fx-font-weight: bold;"/>
+                            <TextField fx:id="txtPublisher" promptText="Enter publisher"/>
+                        </VBox>
+                        
+                        <HBox spacing="10">
+                            <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                <Label text="Year" style="-fx-font-weight: bold;"/>
+                                <TextField fx:id="txtYear" promptText="e.g. 2026"/>
+                            </VBox>
+                            <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                <Label text="Genre" style="-fx-font-weight: bold;"/>
+                                <TextField fx:id="txtGenre" promptText="e.g. Science"/>
+                            </VBox>
+                        </HBox>
+
+                        <VBox spacing="5">
+                            <Label text="Quantity *" style="-fx-font-weight: bold;"/>
+                            <TextField fx:id="txtQuantity" promptText="Total copies"/>
+                        </VBox>
+                    </VBox>
+                </ScrollPane>
+
+                <HBox spacing="10.0" alignment="CENTER_RIGHT">
+                    <Button text="Delete" onAction="#handleDeleteBook" styleClass="btn-danger"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Button text="Cancel" onAction="#handleCancelEdit" styleClass="btn-secondary"/>
+                    <Button text="Save" onAction="#handleSaveBook" styleClass="btn-primary"/>
+                </HBox>
+            </VBox>
+        </items>
+    </SplitPane>
+</VBox>

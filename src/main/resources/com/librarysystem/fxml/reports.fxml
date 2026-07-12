@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="30.0" style="-fx-background-color: transparent;"
+      xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.librarysystem.controller.ReportController">
+
+    <!-- Report Types Header Selection -->
+    <HBox spacing="15.0" alignment="CENTER_LEFT" styleClass="card" style="-fx-padding: 15px;">
+        <Label text="Select Report Type:" style="-fx-font-weight: bold;"/>
+        <ComboBox fx:id="comboReportType" prefWidth="250.0"/>
+        <Button text="⚙️ Generate Report" onAction="#handleGenerate" styleClass="btn-primary"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="🖨️ Export to Console Logs" onAction="#handleExportConsole" styleClass="btn-secondary"/>
+    </HBox>
+
+    <!-- Main Results VBox -->
+    <VBox spacing="20.0" styleClass="card" VBox.vgrow="ALWAYS">
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <Label fx:id="lblReportTitle" text="Library Status Report" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="lblReportTime" text="Date: —" styleClass="label-secondary"/>
+        </HBox>
+
+        <Separator prefWidth="200.0"/>
+
+        <!-- Display Area for Data Grid -->
+        <TableView fx:id="tableReportData" VBox.vgrow="ALWAYS" styleClass="table-view">
+            <!-- Columns are dynamically injected based on selected report type -->
+            <placeholder>
+                <Label text="Generate a report to display data here."/>
+            </placeholder>
+        </TableView>
+
+        <!-- Summary Statistics bar -->
+        <HBox spacing="30.0" alignment="CENTER_RIGHT" style="-fx-background-color: -color-bg; -fx-padding: 15px; -fx-background-radius: 8px;">
+            <HBox spacing="10">
+                <Label text="Total Count:" style="-fx-font-weight: bold;"/>
+                <Label fx:id="lblReportCount" text="0"/>
+            </HBox>
+            <HBox fx:id="boxTotalFine" spacing="10" visible="false">
+                <Label text="Total Fines Collected:" style="-fx-font-weight: bold; -fx-text-fill: -color-danger;"/>
+                <Label fx:id="lblReportFineSum" text="₹0.00" style="-fx-font-weight: bold;"/>
+            </HBox>
+        </HBox>
+    </VBox>
+</VBox>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="20.0" style="-fx-background-color: transparent;"
+      xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.librarysystem.controller.IssuedBookController">
+
+    <!-- Action Bar: Filters, Search and Issue Button -->
+    <HBox spacing="15.0" alignment="CENTER_LEFT" styleClass="card" style="-fx-padding: 15px;">
+        <TextField fx:id="txtSearch" promptText="🔍 Search transactions by Student, Book, or ID..." HBox.hgrow="ALWAYS" styleClass="text-field"/>
+        
+        <ComboBox fx:id="comboFilter" prefWidth="150.0" styleClass="combo-box"/>
+
+        <Button text="🔗 Issue Book" onAction="#handleNewIssue" styleClass="btn-primary"/>
+    </HBox>
+
+    <SplitPane dividerPositions="0.65" VBox.vgrow="ALWAYS" style="-fx-background-color: transparent; -fx-border-color: transparent;">
+        <items>
+            <!-- Left Side: Active/Historic Issue Log -->
+            <VBox spacing="10.0" styleClass="card">
+                <TableView fx:id="tableIssues" VBox.vgrow="ALWAYS" styleClass="table-view">
+                    <columns>
+                        <TableColumn fx:id="colStudent" text="Student" prefWidth="180.0"/>
+                        <TableColumn fx:id="colBook" text="Book Title" prefWidth="220.0"/>
+                        <TableColumn fx:id="colIssueDate" text="Issue Date" prefWidth="100.0"/>
+                        <TableColumn fx:id="colDueDate" text="Due Date" prefWidth="100.0"/>
+                        <TableColumn fx:id="colReturnDate" text="Return Date" prefWidth="100.0"/>
+                        <TableColumn fx:id="colFine" text="Fine (₹)" prefWidth="80.0"/>
+                        <TableColumn fx:id="colStatus" text="Status" prefWidth="100.0"/>
+                    </columns>
+                    <placeholder>
+                        <Label text="No book transactions found."/>
+                    </placeholder>
+                </TableView>
+            </VBox>
+
+            <!-- Right Side: Details / Actions Panel -->
+            <VBox spacing="20.0" styleClass="card" fx:id="panelActions" disable="true">
+                <Label fx:id="lblPanelTitle" text="Book Return Action" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+
+                <VBox spacing="15.0" VBox.vgrow="ALWAYS">
+                    <!-- Issue Information display card -->
+                    <VBox spacing="10.0" style="-fx-background-color: -color-bg; -fx-padding: 15px; -fx-background-radius: 8px;">
+                        <Label text="TRANSACTION DETAILS" style="-fx-font-size: 11px; -fx-text-fill: -color-text-secondary; -fx-font-weight: bold;"/>
+                        
+                        <GridPane hgap="10" vgap="8">
+                            <Label text="Student:" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-weight: bold;"/>
+                            <Label fx:id="lblDetailStudent" text="—" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                            <Label text="Book:" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-font-weight: bold;"/>
+                            <Label fx:id="lblDetailBook" text="—" GridPane.columnIndex="1" GridPane.rowIndex="1" style="-fx-wrap-text: true;"/>
+
+                            <Label text="Issued on:" GridPane.columnIndex="0" GridPane.rowIndex="2" style="-fx-font-weight: bold;"/>
+                            <Label fx:id="lblDetailIssueDate" text="—" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+                            <Label text="Due Date:" GridPane.columnIndex="0" GridPane.rowIndex="3" style="-fx-font-weight: bold;"/>
+                            <Label fx:id="lblDetailDueDate" text="—" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+                            <Label text="Status:" GridPane.columnIndex="0" GridPane.rowIndex="4" style="-fx-font-weight: bold;"/>
+                            <Label fx:id="lblDetailStatus" text="—" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                        </GridPane>
+                    </VBox>
+
+                    <!-- Auto Fine Display -->
+                    <VBox alignment="CENTER" spacing="10.0" fx:id="panelReturnActions"
+                          style="-fx-background-color: -color-bg; -fx-padding: 15px; -fx-background-radius: 8px;">
+                        <Label text="CALCULATED OVERDUE FINE" style="-fx-font-size: 11px; -fx-text-fill: -color-text-secondary; -fx-font-weight: bold;"/>
+                        <Label fx:id="lblCalculatedFine" text="₹0.00" style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: -color-danger;"/>
+                        <Label text="Fine calculated based on ₹2.00 per day rate." style="-fx-font-size: 11px;" styleClass="label-secondary"/>
+                        <Button text="📥 Mark Return &amp; Collect Fine" onAction="#handleReturnBook" styleClass="btn-success" maxWidth="Infinity" prefHeight="40.0"/>
+                    </VBox>
+                </VBox>
+
+                <HBox alignment="CENTER_RIGHT">
+                    <Button text="Cancel" onAction="#handleCancelAction" styleClass="btn-secondary"/>
+                </HBox>
+            </VBox>
+        </items>
+    </SplitPane>
+</VBox>
