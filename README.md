@@ -71,10 +71,12 @@ Create a local MySQL schema and seed default records by executing the provided s
 ```bash
 mysql -u root -p < database/schema.sql
 ```
-*(Alternatively, copy and run the contents of [schema.sql](file:///d:/Projects/LIBRARY%20MANAGEMENT%20SYSTEM/database/schema.sql) directly within your preferred MySQL administration IDE).*
+Alternatively, run [schema.sql](database/schema.sql) in your MySQL administration tool.
+The redirection command above works in Command Prompt or a POSIX shell.
+PowerShell users can use `source database/schema.sql` inside the MySQL client.
 
 ### 2. Configure JDBC Connection details
-Open [db.properties](file:///d:/Projects/LIBRARY%20MANAGEMENT%20SYSTEM/src/main/resources/db.properties) and update the configuration variables to match your local setup:
+Open [db.properties](src/main/resources/db.properties) and update the configuration variables to match your local setup:
 ```properties
 db.url=jdbc:mysql://localhost:3306/library_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
 db.username=YOUR_MYSQL_USERNAME
